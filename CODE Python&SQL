@@ -1,0 +1,28 @@
+!pip install pandasql
+!pip install sqlalchemy==1.4.46
+
+import pandas as pd
+from pandasql import sqldf
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#DATASETS LOAD IN
+df1 = pd.read_csv('dataset1.csv')
+df2 = pd.read_csv('dataset2.csv')
+df3 = pd.read_csv('dataset3.csv')
+
+# concatenate the three dataframes
+df = pd.concat([df1, df2, df3])
+
+# display the concatenated dataframe
+df
+
+# read in the two csv files
+df1 = pd.read_csv('dataset1.csv')
+df2 = pd.read_csv('dataset2.csv')
+
+# merge the two dataframes on the UQNO column
+common_table = pd.merge(df1, df2, on='UQNO')
+
+# display the resulting common table
+common_table
