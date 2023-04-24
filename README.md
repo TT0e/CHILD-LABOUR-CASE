@@ -54,28 +54,14 @@ You will have to perform the data merging and cleaning in python. This means tha
 
 Please find below some tips or useful tricks that will help you out in this assignment: 
 ‐ If you can't read or write to your google drive as you can't find the right path, you can do 
-import os
-os.listdir('/gdrive/')
-This will print out all the files and folders of the specified path, like this you can incrementally 
-check if your path is correct by each time adding the next folder to the path in the listdir 
-function 
-‐ If you need to combine two or multiple dataframes having the same columns into one dataframe, 
-think about using the UNION ALL operator in SQL as we did in TP 2 here. 
-‐ In python, df.colums will print out the column names of your dataframe so that you can check 
-if there are no spaces or other specific characters 
-‐ In python, df.dtypes will print out the types of each column, if it marks object, it is probably 
-a string. 
-‐ You  will  notice  that  the  dataset  has  missing  values.  You  will  need  to  understand  how  the 
-questionnaire was made and answered (refer to the metadata.pdf file) to understand how to deal 
-with  those  missing  values.  For  example,  Q16Mothparthh  is  skipped,  so  is  missing,  if  the 
-respondent answered ‘no’ in Q15Mothaliv. 
+import os os.listdir('/gdrive/') This will print out all the files and folders of the specified path, like this you can incrementally  check if your path is correct by each time adding the next folder to the path in the listdir function 
+
+‐ If you need to combine two or multiple dataframes having the same columns into one dataframe, think about using the UNION ALL operator in SQL as we did in TP 2 here. 
+
+‐ In python, df.colums will print out the column names of your dataframe so that you can check  if there are no spaces or other specific characters 
+
+‐ In python, df.dtypes will print out the types of each column, if it marks object, it is probablY a string. 
+
+‐ You  will  notice  that  the  dataset  has  missing  values.  You  will  need  to  understand  how  the  questionnaire was made and answered (refer to the metadata.pdf file) to understand how to deal  with  those  missing  values.  For  example,  Q16Mothparthh  is  skipped,  so  is  missing,  if  the  respondent answered ‘no’ in Q15Mothaliv. 
+
 ‐ Make sure to use the “Child_Labor” as target variable in your modelling part. 
-‐ Since the target variable is characterized by quite an unbalanced distribution in both the training 
-and test sets, we would suggest having a look at chapter 15.5 SAMPLING AND MISSING VALUE 
-TOOLS (pages 513 to 516) in the Reference book (you can find here the link to the pdf version on 
-the  UV).  There  you  can  find  useful  suggestions  on  how  to  handle  unbalanced  datasets  with 
-Rapidminer. 
-‐ For the recommendation part, an idea could be to look at the variable's importance of your model. 
-This could give you insights about which variables have a high impact on whether a child would 
-be predicted to be involved in Child Labor or not. For example, for random forest models, you can 
-refer to Weight by Tree Importance ‐ RapidMiner Documentation. 
