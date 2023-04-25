@@ -2,27 +2,35 @@
 !pip install sqlalchemy==1.4.46
 
 import pandas as pd
-from pandasql import sqldf
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-#DATASETS LOAD IN
-df1 = pd.read_csv('dataset1.csv')
-df2 = pd.read_csv('dataset2.csv')
-df3 = pd.read_csv('dataset3.csv')
+# Load dataset1 & dataset2
+dataset1 = pd.read_csv('dataset1.csv')
+dataset3 = pd.read_csv('dataset3.csv')
 
-# concatenate the three dataframes
-df = pd.concat([df1, df2, df3])
+# Sum the values from columns Q54TIME_DAY1 to Q54TIME_DAY7 and store the result in the TIME54 column
+dataset3['TIME54'] = dataset3.loc[:, 'Q54TIME_DAY1':'Q54TIME_DAY7'].sum(axis=1)
 
-# display the concatenated dataframe
-df
+# Sum the values from columns Q72TIME_DAY1 to Q72TIME_DAY7 and store the result in the TIME72 column
+dataset3['TIME72'] = dataset3.loc[:, 'Q72TIME_DAY1':'Q72TIME_DAY7'].sum(axis=1)
 
-# read in the two csv files
-df1 = pd.read_csv('dataset1.csv')
-df2 = pd.read_csv('dataset2.csv')
+# Keep only the ID, TIME54, and TIME72 columns and hide the other columns
+dataset3 = dataset3[['ID', 'TIME54', 'TIME72']]
 
-# merge the two dataframes on the UQNO column
-common_table = pd.merge(df1, df2, on='UQNO')
+# Hide the rows that have value 0 in TIME54 & TIME72
+dataset3 = dataset3[dataset3['TIME54'] != 0]
+dataset3 = dataset3[dataset3['TIME72'] != 0]
 
-# display the resulting common table
-common_table
+# Merge dataset1 and dataset3 based on the ID column
+dataset1 = pd.merge(dataset1, dataset3[['ID', 'TIME54', 'TIME72']], on='ID')
+
+# Rename the columns
+dataset1 = dataset1.rename(columns={'TIME54': 'Q54TIME', 'TIME72': 'Q72TIME'})
+
+# Load dataset2
+dataset2 = pd.read_csv('dataset2.csv')
+
+# Merge dataset1 and dataset2 based on the UQNO column
+dataset1 = pd.merge(dataset1, dataset2, on='UQNO')
+
+# only to check
+print(dataset1[['ID','Q54TIME', 'Q72TIME', 'UQNO','Geo_Type_Code']].head(50))
